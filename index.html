@@ -3,221 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Travel Journal</title>
+<title>Scrapbook Diary</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-*{
-  box-sizing:border-box;
-  font-family:'Inter', system-ui, -apple-system;
-}
+*{box-sizing:border-box}
 
 /* Background */
 body{
   margin:0;
-  background:#f4f2ee;
-  color:#1e1e1e;
+  background:#e9e4db;
+  font-family:'Inter';
+  color:#2b2b2b;
 }
 
 /* Header */
 header{
-  padding:22px 16px;
+  padding:20px;
   text-align:center;
-  font-size:22px;
-  font-weight:600;
-  background:#ffffff;
-  border-bottom:1px solid #e6e6e6;
+  font-size:26px;
+  font-family:'Patrick Hand';
+  background:#fff;
+  border-bottom:2px dashed #d3cbbb;
 }
 
 /* Layout */
 .container{
   max-width:480px;
   margin:auto;
-  padding:18px;
+  padding:16px;
 }
 
-/* Card */
-.card{
-  background:#ffffff;
+/* Controls */
+.controls{
+  background:#fff;
+  padding:18px;
   border-radius:22px;
-  padding:18px;
-  margin-bottom:18px;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.06),
-    0 2px 8px rgba(0,0,0,0.04);
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  margin-bottom:20px;
 }
 
-/* Headings */
-h2{
-  font-size:22px;
-  margin:0 0 12px;
-}
-
-h3{
-  font-size:17px;
-  margin:0 0 10px;
-}
-
-/* Inputs */
-input, textarea{
+input, textarea, select{
   width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:1px solid #e1e1e1;
-  background:#fafafa;
-  font-size:14px;
-  margin-bottom:12px;
-  color:#1e1e1e;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  background:#fffdf8;
 }
 
-textarea{
-  resize:none;
-  height:90px;
-  line-height:1.6;
-}
+textarea{resize:none;height:70px}
 
-/* Buttons */
 button{
   width:100%;
   padding:14px;
   border:none;
   border-radius:16px;
+  background:#2b2b2b;
+  color:#fff;
   font-size:15px;
-  font-weight:600;
-  background:#1e1e1e;
-  color:#ffffff;
 }
 
-/* Places */
-.place{
+/* Diary */
+.diary{
   display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:15px;
-  margin-bottom:10px;
+  flex-direction:column;
+  gap:30px;
 }
 
-.place input{
-  transform:scale(1.2);
+/* Page */
+.page{
+  position:relative;
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 16px 40px rgba(0,0,0,.15);
+  transform:rotate(var(--rotate));
+  background:var(--paper);
 }
 
-/* Journal */
-.journal{
-  background:#fdfcfb;
-  border-radius:22px;
-  padding:20px;
+/* Paper textures */
+.paper-plain{--paper:#fff;}
+.paper-beige{--paper:#fdf6e3;}
+.paper-kraft{--paper:#f3e7d3;}
+.paper-ruled{
+  --paper:repeating-linear-gradient(
+    #fff,
+    #fff 22px,
+    #f1f1f1 23px
+  );
 }
 
-.journal h3{
-  margin-top:20px;
+/* Tape */
+.page::before{
+  content:'';
+  position:absolute;
+  top:-10px;
+  left:30%;
+  width:40%;
+  height:18px;
+  background:rgba(255,235,150,.7);
+  border-radius:4px;
 }
 
-.journal p{
-  font-size:15px;
-  line-height:1.7;
+/* Date */
+.date{
+  font-family:'Patrick Hand';
+  font-size:14px;
+  opacity:.6;
+}
+
+/* Polaroid */
+.photo{
+  background:#fff;
+  padding:8px 8px 18px;
+  margin:12px 0;
+  border-radius:6px;
+  box-shadow:0 6px 16px rgba(0,0,0,.2);
+  cursor:grab;
+}
+
+.photo img{
+  width:100%;
+  border-radius:4px;
+}
+
+/* Text */
+.page h3{
+  font-family:'Patrick Hand';
+  font-size:20px;
   margin:6px 0;
-  color:#333;
 }
 
-.journal img{
-  width:100%;
-  border-radius:18px;
-  margin:14px 0;
+.note{
+  font-family:'Patrick Hand';
+  font-size:16px;
+  cursor:grab;
 }
 
-/* Small text */
-.small{
-  font-size:13px;
-  color:#777;
+/* Sticker */
+.sticker{
+  position:absolute;
+  bottom:-12px;
+  right:-10px;
+  font-size:34px;
+  cursor:grab;
 }
 
-/* Export Page */
-.export-page{
-  background:#fdfcfb;
-  color:#222;
-  padding:28px;
+/* Backup */
+.backup{
+  margin:24px 0;
 }
 
-.export-page h1{
-  font-size:30px;
-  margin-bottom:6px;
-}
-
-.entry{
-  margin-bottom:48px;
-}
-
-.entry img{
-  width:100%;
-  border-radius:20px;
-  margin:18px 0;
+/* Print */
+@media print{
+  body{background:#fff}
+  .controls,.backup,header{display:none}
+  .page{
+    page-break-after:always;
+    transform:none;
+    box-shadow:none;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>Travel Journal</header>
+<header>My Scrapbook Diary</header>
 
 <div class="container">
 
-<!-- Backup -->
-<div class="card">
-  <button onclick="exportBackup()">Backup Journal</button>
-  <input type="file" accept="application/json" onchange="importBackup(event)">
-  <p class="small">Download backup regularly to keep your memories safe</p>
-</div>
+<!-- Controls -->
+<div class="controls">
+  <input id="title" placeholder="Place / Moment">
+  <textarea id="text" placeholder="What happened, what you felt…"></textarea>
 
-<!-- Kerala Places -->
-<div class="card">
-  <h3>Places Visited (Kerala)</h3>
-  <div class="place"><input type="checkbox"> Munnar</div>
-  <div class="place"><input type="checkbox"> Varkala</div>
-  <div class="place"><input type="checkbox"> Alappuzha</div>
-  <div class="place"><input type="checkbox"> Wayanad</div>
-  <div class="place"><input type="checkbox"> Fort Kochi</div>
-  <div class="place"><input type="checkbox"> Athirappilly</div>
-</div>
+  <select id="paper">
+    <option value="paper-plain">Plain Paper</option>
+    <option value="paper-beige">Beige Journal</option>
+    <option value="paper-kraft">Kraft Paper</option>
+    <option value="paper-ruled">Ruled Notebook</option>
+  </select>
 
-<!-- Add Entry -->
-<div class="card">
-  <h3>Add Memory</h3>
-  <input id="placeName" placeholder="Place name">
-  <textarea id="memory" placeholder="Memory or experience"></textarea>
-  <textarea id="learned" placeholder="Things I learned"></textarea>
-  <textarea id="change" placeholder="How this place changed me"></textarea>
+  <select id="sticker">
+    <option value="✨">✨ Sparkle</option>
+    <option value="❤️">❤️ Heart</option>
+    <option value="📸">📸 Camera</option>
+    <option value="🌸">🌸 Flower</option>
+    <option value="☕">☕ Coffee</option>
+    <option value="📖">📖 Book</option>
+  </select>
+
   <input type="file" id="photo" accept="image/*">
-  <button onclick="addEntry()">Add Memory</button>
+  <button onclick="addPage()">Add Page</button>
 </div>
 
-<!-- Journal -->
-<div class="card journal" id="journal">
-  <h2>My Journal</h2>
-</div>
+<!-- Diary -->
+<div class="diary" id="diary"></div>
 
-<!-- Export -->
-<div class="card">
-  <button onclick="generateJournal()">Generate Journal Page</button>
+<!-- Backup -->
+<div class="backup">
+  <button onclick="exportBackup()">Backup Diary</button>
+  <input type="file" accept="application/json" onchange="importBackup(event)">
 </div>
 
 </div>
 
 <script>
-let journalData = JSON.parse(localStorage.getItem("travelJournal")) || [];
+let pages = JSON.parse(localStorage.getItem("scrapbookDiary")) || [];
 
 function save(){
-  localStorage.setItem("travelJournal", JSON.stringify(journalData));
+  localStorage.setItem("scrapbookDiary", JSON.stringify(pages));
 }
 
-function addEntry(){
-  if(!placeName.value) return alert("Place name required");
+function addPage(){
+  if(!title.value) return alert("Add a title");
 
-  const entry={
-    place:placeName.value,
-    memory:memory.value,
-    learned:learned.value,
-    change:change.value,
+  const page={
+    title:title.value,
+    text:text.value,
+    sticker:sticker.value,
+    paper:paper.value,
+    date:new Date().toDateString(),
+    rotate:(Math.random()*6-3)+"deg",
     image:null
   };
 
@@ -225,44 +234,71 @@ function addEntry(){
   if(file){
     const reader=new FileReader();
     reader.onload=()=>{
-      entry.image=reader.result;
-      journalData.push(entry);
+      page.image=reader.result;
+      pages.unshift(page);
       save(); render();
     };
     reader.readAsDataURL(file);
   }else{
-    journalData.push(entry);
+    pages.unshift(page);
     save(); render();
   }
 
-  placeName.value=memory.value=learned.value=change.value="";
+  title.value=text.value="";
   photo.value="";
 }
 
 function render(){
-  const j=document.getElementById("journal");
-  j.innerHTML="<h2>My Journal</h2>";
+  const d=document.getElementById("diary");
+  d.innerHTML="";
 
-  journalData.forEach(e=>{
-    j.innerHTML+=`
-      <h3>${e.place}</h3>
-      ${e.image?`<img src="${e.image}">`:""}
-      <p><b>Memory:</b> ${e.memory}</p>
-      <p><b>Learned:</b> ${e.learned}</p>
-      <p><b>Change:</b> ${e.change}</p>
-      <hr>
+  pages.forEach(p=>{
+    const div=document.createElement("div");
+    div.className=`page ${p.paper}`;
+    div.style.setProperty("--rotate",p.rotate);
+
+    div.innerHTML=`
+      <div class="date">${p.date}</div>
+      <h3>${p.title}</h3>
+      ${p.image?`<div class="photo draggable"><img src="${p.image}"></div>`:""}
+      <div class="note draggable">${p.text}</div>
+      <div class="sticker draggable">${p.sticker}</div>
     `;
+    d.appendChild(div);
+  });
+
+  makeDraggable();
+}
+
+/* Drag logic */
+function makeDraggable(){
+  document.querySelectorAll(".draggable").forEach(el=>{
+    let offsetX, offsetY, dragging=false;
+
+    el.addEventListener("pointerdown",e=>{
+      dragging=true;
+      el.setPointerCapture(e.pointerId);
+      offsetX=e.clientX-el.offsetLeft;
+      offsetY=e.clientY-el.offsetTop;
+    });
+
+    el.addEventListener("pointermove",e=>{
+      if(!dragging) return;
+      el.style.position="absolute";
+      el.style.left=(e.clientX-offsetX)+"px";
+      el.style.top=(e.clientY-offsetY)+"px";
+    });
+
+    el.addEventListener("pointerup",()=>dragging=false);
   });
 }
 
+/* Backup */
 function exportBackup(){
-  const blob=new Blob(
-    [JSON.stringify(journalData,null,2)],
-    {type:"application/json"}
-  );
+  const blob=new Blob([JSON.stringify(pages,null,2)],{type:"application/json"});
   const a=document.createElement("a");
   a.href=URL.createObjectURL(blob);
-  a.download="travel-journal-backup.json";
+  a.download="scrapbook-diary-backup.json";
   a.click();
 }
 
@@ -271,41 +307,10 @@ function importBackup(e){
   if(!file) return;
   const reader=new FileReader();
   reader.onload=()=>{
-    journalData=JSON.parse(reader.result);
+    pages=JSON.parse(reader.result);
     save(); render();
   };
   reader.readAsText(file);
-}
-
-function generateJournal(){
-  if(!journalData.length) return alert("No entries yet");
-
-  const win=window.open("","_blank");
-  let html=`
-  <html>
-  <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>${document.querySelector("style").innerHTML}</style>
-  </head>
-  <body class="export-page">
-  <h1>My Travel Journal</h1>
-  `;
-
-  journalData.forEach(e=>{
-    html+=`
-      <div class="entry">
-        <h2>${e.place}</h2>
-        ${e.image?`<img src="${e.image}">`:""}
-        <p>${e.memory}</p>
-        <p>${e.learned}</p>
-        <p>${e.change}</p>
-      </div>
-    `;
-  });
-
-  html+=`<script>window.onload=()=>window.print();<\/script></body></html>`;
-  win.document.write(html);
-  win.document.close();
 }
 
 render();
